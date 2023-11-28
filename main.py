@@ -1,10 +1,11 @@
 def main():
     book_path = "books/frankenstein.txt"
-    text = get_book_text(book_path)
+    #text = get_book_text(book_path)
     #words = count_words(text)
     #print(f"Words in frankenstein-book: {words}")
-    letters = num_letters(text)
-    print(letters)
+    #letters = num_letters(text)
+    #print(letters)
+    doc_report(book_path)
 
 
 def get_book_text(path):
@@ -19,6 +20,7 @@ def count_words(book):
     #return amount
     return len(words)
 
+# My count letters
 def num_letters(document):
     letters = {}
     alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -30,5 +32,33 @@ def num_letters(document):
             letters[letter] += 1
     return letters
 
+# Boot.Dev count letters
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
+        else:
+            chars[lowered] = 1
+    return chars
+
+def doc_report(document_path):
+    print(f"--- Begin report of {document_path} ---")
+    text = get_book_text(document_path)
+    words = count_words(text)
+    print(f"{words} words found in the document\n")
+    characters = get_chars_dict(text)#num_letters(text)
+    letters = []
+    nums = []
+    for char in characters:
+        if char.isalpha():
+            letters.append(char)
+            num = characters[char]
+            nums.append(num)
+        #print(f"The letter '{letter}' character was found {times} times")
+    for i in range(len(letters)):
+        print(f"The letter '{letters[i]}' character was found {nums[i]} times")
+    print("--- End report ---")
 
 main()
