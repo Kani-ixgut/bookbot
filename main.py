@@ -2,7 +2,7 @@ def main():
     book_path = "books/frankenstein.txt"
     text = get_book_text(book_path)
     words = count_words(text)
-    print(words)
+    print(f"Words in frankenstein-book: {words}")
 
 
 def get_book_text(path):
