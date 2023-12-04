@@ -43,6 +43,9 @@ def get_chars_dict(text):
             chars[lowered] = 1
     return chars
 
+def sort_on(d):
+    return d["num"]
+
 def doc_report(document_path):
     print(f"--- Begin report of {document_path} ---")
     text = get_book_text(document_path)
@@ -51,14 +54,18 @@ def doc_report(document_path):
     characters = get_chars_dict(text)#num_letters(text)
     letters = []
     nums = []
+    d = {}
     for char in characters:
         if char.isalpha():
-            letters.append(char)
-            num = characters[char]
-            nums.append(num)
+            letters.append({"char": char, "num": characters[char]})
+            #num = characters[char]
+            #nums.append(num)
         #print(f"The letter '{letter}' character was found {times} times")
-    for i in range(len(letters)):
-        print(f"The letter '{letters[i]}' character was found {nums[i]} times")
+    letters.sort(reverse= True, key=sort_on)
+    #for i in range(len(letters)):
+    #    print(f"The letter '{letters[i]}' character was found {nums[i]} times")
+    for alph in letters:
+        print(f"The '{alph['char']}' character was found {alph['num']} times")
     print("--- End report ---")
 
 main()
